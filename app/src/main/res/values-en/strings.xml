@@ -1,0 +1,97 @@
+<resources>
+    <string name="app_name">Teach Me Electrotherapy</string>
+
+    <!-- Main Screen -->
+    <string name="main_title">Electrotherapy Current Types</string>
+    <string name="current_tens">TENS</string>
+    <string name="current_ifc">IFC (Interferential)</string>
+    <string name="current_faradic">Faradic</string>
+    <string name="current_russian">Russian Current (Kots)</string>
+    <string name="current_galvanic">Galvanic</string>
+    <string name="current_diadinamic">Diadynamic</string>
+    <string name="current_high_voltage">High Voltage (HVPS)</string>
+    <string name="current_signal_gen">Signal Generator</string>
+    <string name="current_skin_filter">Skin Filter</string>
+
+    <!-- IFC Screen -->
+    <string name="ifc_title">IFC Simulator</string>
+    <string name="ifc_carrier">Carrier (Fixed 4kHz)</string>
+    <string name="ifc_modulator">Modulator (AMF)</string>
+    <string name="ifc_result">Result (Interference)</string>
+    <string name="ifc_amf">AMF (Beat Frequency)</string>
+    <string name="ifc_autosync">Lock to AMF (Auto-Sync)</string>
+
+    <!-- Faradic Screen -->
+    <string name="faradic_title">Faradic Current Simulator</string>
+    <string name="faradic_type">Modified Faradic (Surge)</string>
+    <string name="faradic_on">Work (ON)</string>
+    <string name="faradic_off">Rest (OFF)</string>
+
+    <!-- Russian Screen -->
+    <string name="russian_title">Russian Current Simulator</string>
+    <string name="russian_burst_freq">Burst Frequency</string>
+    <string name="russian_carrier">Carrier: 2500 Hz (Fixed)</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_language">App Language</string>
+    <string name="lang_tr">🇹🇷 Turkish</string>
+    <string name="lang_en">🇺🇸 English</string>
+    <string name="label_exit">Exit</string>
+    <string name="exit_confirm">Are you sure you want to exit?</string>
+    <string name="label_yes">Yes</string>
+    <string name="label_no">No</string>
+
+
+    <!-- Common Controls -->
+    <string name="label_amplitude">Amplitude</string>
+    <string name="label_frequency">Frequency</string>
+    <string name="label_timebase">Timebase</string>
+    <string name="label_back">Back</string>
+    <string name="label_voltage">Voltage</string>
+    <string name="label_zoom">Time (Zoom)</string>
+
+    <!-- TENS Screen -->
+    <string name="tens_title">TENS Simulator</string>
+    <string name="tens_pulse_width">Pulse Width</string>
+    <string name="tens_mode_selection">Mode Selection</string>
+    <string name="tens_mode_sym">Biphasic Symmetric</string>
+    <string name="tens_mode_asym">Biphasic Asymmetric</string>
+    <string name="tens_mode_mono">Monophasic</string>
+    <string name="tens_mode_burst">Burst Mode</string>
+
+    <!-- Galvanic Screen -->
+    <string name="galvanic_title">Galvanic Current Simulator</string>
+    <string name="galvanic_direct">Direct Galvanic Current</string>
+    <string name="galvanic_interrupted">Interrupted Galvanic (Fixed 50%)</string>
+    <string name="galvanic_variable">Variable Galvanic</string>
+    <string name="galvanic_duty_cycle">Duty Cycle (DC)</string>
+
+    <!-- Diadinamic Screen -->
+    <string name="diadinamic_title">Diadynamic Current Simulator</string>
+    <string name="diadinamic_ref">Reference AC (50Hz)</string>
+    <string name="diadinamic_mf">MF - Monophase (Half Wave)</string>
+    <string name="diadinamic_df">DF - Diphase (Full Wave)</string>
+
+    <!-- High Voltage Screen -->
+    <string name="hvps_title">HVPS (High Voltage) Simulator</string>
+    <string name="hvps_polarity">Polarity</string>
+    <string name="hvps_pos">Positive</string>
+    <string name="hvps_neg">Negative</string>
+    <string name="hvps_type">Twin Peak (Monophasic) Pulse</string>
+
+    <!-- Signal Generator -->
+    <string name="sig_gen_title">Signal Generator</string>
+    <string name="sig_gen_waveform">Waveform</string>
+    <string name="sig_gen_sine">Sine</string>
+    <string name="sig_gen_square">Square</string>
+    <string name="sig_gen_sawtooth">Sawtooth</string>
+
+    <!-- Skin Filter -->
+    <string name="skin_title">Skin Filter Simulator</string>
+    <string name="skin_model">Skin Model (Impedance)</string>
+    <string name="skin_transmission">Transmission</string>
+    <string name="skin_desc">As frequency increases, the skin\'s resistance (capacitive reactance) decreases, and the current passes more easily into the tissue.</string>
+    <string name="skin_output">Output</string>
+    <string name="skin_in_tissue">In-Tissue</string>
+</resources>

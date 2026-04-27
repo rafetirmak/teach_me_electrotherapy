@@ -1,0 +1,97 @@
+<resources>
+    <string name="app_name">Teach Me Electrotherapy</string>
+
+    <!-- Main Screen -->
+    <string name="main_title">Elektroterapi Akım Türleri</string>
+    <string name="current_tens">TENS</string>
+    <string name="current_ifc">IFC (İnterferansiyel)</string>
+    <string name="current_faradic">Faradic</string>
+    <string name="current_russian">Rus Akımı (Kots)</string>
+    <string name="current_galvanic">Galvanik</string>
+    <string name="current_diadinamic">Diadinamik</string>
+    <string name="current_high_voltage">Yüksek Voltaj (HVPS)</string>
+    <string name="current_signal_gen">Sinyal Jeneratörü</string>
+    <string name="current_skin_filter">Deri Filtresi</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Ayarlar</string>
+    <string name="settings_language">Uygulama Dili</string>
+    <string name="lang_tr">🇹🇷 Türkçe</string>
+    <string name="lang_en">🇺🇸 English</string>
+    <string name="label_exit">Çıkış</string>
+    <string name="exit_confirm">Uygulamadan çıkmak istediğinize emin misiniz?</string>
+    <string name="label_yes">Evet</string>
+    <string name="label_no">Hayır</string>
+
+
+    <!-- Common Controls -->
+    <string name="label_amplitude">Genlik</string>
+    <string name="label_frequency">Frekans</string>
+    <string name="label_timebase">Zaman Ölçeği</string>
+    <string name="label_back">Geri</string>
+    <string name="label_voltage">Voltaj</string>
+    <string name="label_zoom">Zaman (Zoom)</string>
+
+    <!-- TENS Screen -->
+    <string name="tens_title">TENS Simülatörü</string>
+    <string name="tens_pulse_width">Atım Süresi</string>
+    <string name="tens_mode_selection">Mod Seçimi</string>
+    <string name="tens_mode_sym">Bifazik Simetrik</string>
+    <string name="tens_mode_asym">Bifazik Asimetrik</string>
+    <string name="tens_mode_mono">Monofazik</string>
+    <string name="tens_mode_burst">Burst (Paket)</string>
+
+    <!-- Galvanic Screen -->
+    <string name="galvanic_title">Galvanik Akım Simülatörü</string>
+    <string name="galvanic_direct">Düz Galvanik Akım</string>
+    <string name="galvanic_interrupted">Kesikli Galvanik (%50 Sabit)</string>
+    <string name="galvanic_variable">Ayarlı Galvanik</string>
+    <string name="galvanic_duty_cycle">Görev Döngüsü (DC)</string>
+
+    <!-- Diadinamic Screen -->
+    <string name="diadinamic_title">Diadinamik Akım Simülatörü</string>
+    <string name="diadinamic_ref">Referans AC (50Hz)</string>
+    <string name="diadinamic_mf">MF - Monofaz (Yarım Dalga)</string>
+    <string name="diadinamic_df">DF - Difaz (Tam Dalga)</string>
+
+    <!-- High Voltage Screen -->
+    <string name="hvps_title">HVPS (Yüksek Voltaj) Simülatörü</string>
+    <string name="hvps_polarity">Polarite</string>
+    <string name="hvps_pos">Pozitif</string>
+    <string name="hvps_neg">Negatif</string>
+    <string name="hvps_type">Twin Peak (Çift Tepe) Monofazik Atım</string>
+
+    <!-- Signal Generator -->
+    <string name="sig_gen_title">Sinyal Jeneratörü</string>
+    <string name="sig_gen_waveform">Dalga Formu</string>
+    <string name="sig_gen_sine">Sinüs</string>
+    <string name="sig_gen_square">Kare</string>
+    <string name="sig_gen_sawtooth">Testere</string>
+
+    <!-- Skin Filter -->
+    <string name="skin_title">Deri Filtresi Simülatörü</string>
+    <string name="skin_model">Deri Modeli (Empedans)</string>
+    <string name="skin_transmission">Geçirgenlik</string>
+    <string name="skin_desc">Frekans arttıkça derinin direnci (kapasitif reaktans) azalır ve akım doku içine daha kolay geçer.</string>
+    <string name="skin_output">Çıkış</string>
+    <string name="skin_in_tissue">Doku İçi</string>
+
+    <!-- IFC Screen -->
+    <string name="ifc_title">IFC Simülatörü</string>
+    <string name="ifc_carrier">Taşıyıcı (Sabit 4kHz)</string>
+    <string name="ifc_modulator">Modüle Edici (AMF)</string>
+    <string name="ifc_result">Sonuç (İnterferans)</string>
+    <string name="ifc_amf">AMF (Vuru Frekansı)</string>
+    <string name="ifc_autosync">AMF\'ye Kilitle (Otomatik Zoom)</string>
+
+    <!-- Faradic Screen -->
+    <string name="faradic_title">Faradic Akım Simülatörü</string>
+    <string name="faradic_type">Modifiye Faradic (Surge)</string>
+    <string name="faradic_on">Çalışma (ON)</string>
+    <string name="faradic_off">Dinlenme (OFF)</string>
+
+    <!-- Russian Screen -->
+    <string name="russian_title">Rus Akımı Simülatörü</string>
+    <string name="russian_burst_freq">Paket Frekansı</string>
+    <string name="russian_carrier">Taşıyıcı: 2500 Hz (Fixed)</string>
+</resources>
