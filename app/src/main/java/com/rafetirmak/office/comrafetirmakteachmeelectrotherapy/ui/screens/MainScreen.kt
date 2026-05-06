@@ -3,6 +3,7 @@ package com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.ui.screens
 import android.app.Activity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.*
@@ -19,7 +20,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Settings
 
-data class CurrentType(val id: String, val nameResId: Int)
+data class CurrentType(val id: String, val nameResId: Int, val level: DifficultyLevel)
+
+enum class DifficultyLevel(val titleResId: Int) {
+    BEGINNER(R.string.level_beginner),
+    INTERMEDIATE(R.string.level_intermediate),
+    ADVANCED(R.string.level_advanced),
+    EXPERT(R.string.level_expert)
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,16 +39,20 @@ fun MainScreen(
     var showExitDialog by remember { mutableStateOf(false) }
 
     val currentTypes = listOf(
-        CurrentType("tens", R.string.current_tens),
-        CurrentType("ifc", R.string.current_ifc),
-        CurrentType("faradic", R.string.current_faradic),
-        CurrentType("russian", R.string.current_russian),
-        CurrentType("galvanic", R.string.current_galvanic),
-        CurrentType("diadinamic", R.string.current_diadinamic),
-        CurrentType("high_voltage", R.string.current_high_voltage),
-        CurrentType("signal_generator", R.string.current_signal_gen),
-        CurrentType("skin_filter", R.string.current_skin_filter)
+        CurrentType("signal_generator", R.string.current_signal_gen, DifficultyLevel.BEGINNER),
+        CurrentType("skin_filter", R.string.current_skin_filter, DifficultyLevel.BEGINNER),
+        CurrentType("galvanic", R.string.current_galvanic, DifficultyLevel.INTERMEDIATE),
+        CurrentType("diadinamic", R.string.current_diadinamic, DifficultyLevel.INTERMEDIATE),
+        CurrentType("tens", R.string.current_tens, DifficultyLevel.ADVANCED),
+        CurrentType("faradic", R.string.current_faradic, DifficultyLevel.ADVANCED),
+        CurrentType("high_voltage", R.string.current_high_voltage, DifficultyLevel.EXPERT),
+        CurrentType("russian", R.string.current_russian, DifficultyLevel.EXPERT),
+        CurrentType("ifc", R.string.current_ifc, DifficultyLevel.EXPERT)
     )
+
+    val groupedCurrents = remember(currentTypes) {
+        currentTypes.groupBy { it.level }
+    }
 
     if (showExitDialog) {
         AlertDialog(
@@ -82,23 +94,34 @@ fun MainScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.padding(padding)
         ) {
-            items(currentTypes) { type ->
-                Card(
-                    onClick = { onNavigateToCurrent(type.id) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(120.dp)
-                ) {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier.fillMaxSize()
+            groupedCurrents.forEach { (level, currents) ->
+                item(span = { GridItemSpan(maxLineSpan) }) {
+                    Text(
+                        text = stringResource(level.titleResId),
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
+                    )
+                }
+
+                items(currents) { type ->
+                    Card(
+                        onClick = { onNavigateToCurrent(type.id) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(120.dp)
                     ) {
-                        Text(
-                            text = stringResource(type.nameResId),
-                            style = MaterialTheme.typography.titleMedium,
-                            textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                            modifier = Modifier.padding(8.dp)
-                        )
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            Text(
+                                text = stringResource(type.nameResId),
+                                style = MaterialTheme.typography.titleMedium,
+                                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                                modifier = Modifier.padding(8.dp)
+                            )
+                        }
                     }
                 }
             }

@@ -3,6 +3,10 @@
 
     <!-- Main Screen -->
     <string name="main_title">Elektroterapi Akım Türleri</string>
+    <string name="level_beginner">Seviye 1: Temel Bilgiler</string>
+    <string name="level_intermediate">Seviye 2: Orta Seviye</string>
+    <string name="level_advanced">Seviye 3: İleri Seviye</string>
+    <string name="level_expert">Seviye 4: Uzmanlık</string>
     <string name="current_tens">TENS</string>
     <string name="current_ifc">IFC (İnterferansiyel)</string>
     <string name="current_faradic">Faradic</string>

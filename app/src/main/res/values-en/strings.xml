@@ -3,6 +3,10 @@
 
     <!-- Main Screen -->
     <string name="main_title">Electrotherapy Current Types</string>
+    <string name="level_beginner">Level 1: Fundamentals</string>
+    <string name="level_intermediate">Level 2: Intermediate</string>
+    <string name="level_advanced">Level 3: Advanced</string>
+    <string name="level_expert">Level 4: Expert</string>
     <string name="current_tens">TENS</string>
     <string name="current_ifc">IFC (Interferential)</string>
     <string name="current_faradic">Faradic</string>
