@@ -98,4 +98,24 @@
     <string name="skin_desc">As frequency increases, the skin\'s resistance (capacitive reactance) decreases, and the current passes more easily into the tissue.</string>
     <string name="skin_output">Output</string>
     <string name="skin_in_tissue">In-Tissue</string>
+
+    <!-- About Section (Imported) -->
+    <string name="about_title">About</string>
+    <string name="back_desc">Back</string>
+    <string name="visit_website">Website</string>
+    <string name="linkedin_label">LinkedIn</string>
+    <string name="orcid_label">ORCID: %s</string>
+    <string name="wos_label">Web of Science: %s</string>
+    <string name="books_section">Physiotherapy E-Books Series</string>
+
+    <!-- Profile Info -->
+    <string name="profile_name">Rafet Irmak</string>
+    <string name="profile_title">Sports Physiotherapist\n(PT PhD)</string>
+    <string name="profile_bio">I conduct scientific studies in the field of physiotherapy and rehabilitation and develop digital educational resources.</string>
+
+    <!-- Books -->
+    <string name="book1_title">Physiotherapy Handbook</string>
+    <string name="book1_desc">A practical guide for clinical applications.</string>
+    <string name="book2_title">E-Book 2</string>
+    <string name="book2_desc">Current approaches in physiotherapy.</string>
 </resources>

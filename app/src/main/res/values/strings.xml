@@ -98,4 +98,24 @@
     <string name="russian_title">Rus Akımı Simülatörü</string>
     <string name="russian_burst_freq">Paket Frekansı</string>
     <string name="russian_carrier">Taşıyıcı: 2500 Hz (Fixed)</string>
+
+    <!-- About Section (Imported) -->
+    <string name="about_title">Hakkında</string>
+    <string name="back_desc">Geri</string>
+    <string name="visit_website">Web Sitesi</string>
+    <string name="linkedin_label">LinkedIn</string>
+    <string name="orcid_label">ORCID: %s</string>
+    <string name="wos_label">Web of Science: %s</string>
+    <string name="books_section">Fizyoterapi Elektronik Kitaplar Serisi</string>
+
+    <!-- Profil Bilgileri -->
+    <string name="profile_name">Rafet Irmak</string>
+    <string name="profile_title">Spor Fizyoterapisti\n(Bilim Doktoru)</string>
+    <string name="profile_bio">Fizyoterapi ve rehabilitasyon alanında bilimsel çalışmalar yürütmekte ve dijital eğitim kaynakları geliştirmekteyim.</string>
+
+    <!-- Kitaplar -->
+    <string name="book1_title">Fizyoterapi El Kitabı</string>
+    <string name="book1_desc">Klinik uygulamalar için pratik rehber.</string>
+    <string name="book2_title">Elektronik Kitap 2</string>
+    <string name="book2_desc">Fizyoterapide güncel yaklaşımlar.</string>
 </resources>

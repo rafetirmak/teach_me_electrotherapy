@@ -5,6 +5,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.ui.screens.*
+import com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.ui.screens.AboutAcademicScreen
+import com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.AboutDeveloper
 
 import com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.ui.screens.RussianScreen
 
@@ -27,7 +29,16 @@ fun ElectrotherapyApp() {
                 },
                 onNavigateToSettings = {
                     navController.navigate("settings")
+                },
+                onNavigateToAbout = {
+                    navController.navigate("about")
                 }
+            )
+        }
+        composable("about") {
+            AboutAcademicScreen(
+                profile = AboutDeveloper.getProfile(),
+                onBack = { navController.popBackStack() }
             )
         }
         composable("tens") {

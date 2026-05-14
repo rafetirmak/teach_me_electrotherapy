@@ -1,11 +1,13 @@
 package com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.model
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
 data class AcademicProfile(
     @StringRes val nameRes: Int,
     @StringRes val titleRes: Int,
     @StringRes val bioRes: Int,
+    @DrawableRes val imageRes: Int,
     val websiteUrl: String,
     val linkedInUrl: String,
     val orcidId: String,
@@ -17,7 +19,7 @@ data class FizyoBook(
     @StringRes val titleRes: Int,
     @StringRes val descriptionRes: Int,
     val storeUrl: String,
-    val imageUrl: String? = null
+    @DrawableRes val imageRes: Int? = null
 )
 
 data class ScientificPublication(

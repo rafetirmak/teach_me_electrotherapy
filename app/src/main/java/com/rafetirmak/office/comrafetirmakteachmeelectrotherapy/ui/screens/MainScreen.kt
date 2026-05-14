@@ -18,6 +18,7 @@ import com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.R
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
 
 data class CurrentType(val id: String, val nameResId: Int, val level: DifficultyLevel)
@@ -33,7 +34,8 @@ enum class DifficultyLevel(val titleResId: Int) {
 @Composable
 fun MainScreen(
     onNavigateToCurrent: (String) -> Unit,
-    onNavigateToSettings: () -> Unit
+    onNavigateToSettings: () -> Unit,
+    onNavigateToAbout: () -> Unit
 ) {
     val context = LocalContext.current
     var showExitDialog by remember { mutableStateOf(false) }
@@ -77,6 +79,9 @@ fun MainScreen(
             TopAppBar(
                 title = { Text(stringResource(R.string.main_title)) },
                 actions = {
+                    IconButton(onClick = onNavigateToAbout) {
+                        Icon(Icons.Default.Info, contentDescription = stringResource(R.string.about_title))
+                    }
                     IconButton(onClick = onNavigateToSettings) {
                         Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings_title))
                     }
