@@ -46,6 +46,22 @@
     <string name="label_yes">Yes</string>
     <string name="label_no">No</string>
 
+    <!-- Dictionary -->
+    <string name="dictionary_title">Dictionary</string>
+    <string name="search_hint">Search terms...</string>
+    <string name="no_results">No results found.</string>
+    <string name="sync_dictionary">Sync Dictionary</string>
+    <string name="check_connection">Check Connection</string>
+    <string name="connection_ok">Connection Successful</string>
+    <string name="connection_error">Connection Error</string>
+    <string name="found_files">Found Files:</string>
+
+    <!-- In Memory -->
+    <string name="acknowledgments_title">In Memory</string>
+    <string name="acknowledgments_desc">In remembrance of the esteemed professors who dedicated their lives to the advancement of electrotherapy and illuminated our path with their work.</string>
+    <string name="contrib_alex_ward">Alex Ward</string>
+    <string name="contrib_tim_watson">Tim Watson</string>
+
 
     <!-- Common Controls -->
     <string name="label_amplitude">Amplitude</string>
@@ -107,6 +123,7 @@
     <string name="orcid_label">ORCID: %s</string>
     <string name="wos_label">Web of Science: %s</string>
     <string name="books_section">Physiotherapy E-Books Series</string>
+    <string name="books_url">https://rafetirmak.com/index_eng.php</string>
 
     <!-- Profile Info -->
     <string name="profile_name">Rafet Irmak</string>

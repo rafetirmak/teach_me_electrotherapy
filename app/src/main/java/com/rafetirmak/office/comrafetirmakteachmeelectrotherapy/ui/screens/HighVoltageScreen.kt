@@ -22,7 +22,7 @@ import com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.R
 fun HighVoltageScreen(onBack: () -> Unit) {
     var amp by remember { mutableFloatStateOf(365f) }
     var freq by remember { mutableFloatStateOf(50f) }
-    var timebase by remember { mutableFloatStateOf(10.0f) }
+    var timebase by remember { mutableFloatStateOf(5.0f) }
     var polarity by remember { mutableIntStateOf(1) } // 1 for +, -1 for -
 
     Scaffold(
@@ -53,6 +53,8 @@ fun HighVoltageScreen(onBack: () -> Unit) {
                     WaveformChannel(
                         name = "HVPS",
                         color = if (polarity == 1) Color(0xFFE74C3C) else Color(0xFF3498DB),
+                        scaleY = 0.4f, // Adjusted scale for high voltage values (0-500V)
+                        expectedMaxFreq = 10000f, // High frequency components due to narrow pulses
                         onDrawWaveform = { t ->
                             calculateHVPSValue(t, amp, freq, polarity)
                         }

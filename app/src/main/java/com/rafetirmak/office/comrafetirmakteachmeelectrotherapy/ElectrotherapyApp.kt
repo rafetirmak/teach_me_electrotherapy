@@ -32,14 +32,26 @@ fun ElectrotherapyApp() {
                 },
                 onNavigateToAbout = {
                     navController.navigate("about")
+                },
+                onNavigateToDictionary = {
+                    navController.navigate("dictionary")
+                },
+                onNavigateToAcknowledgments = {
+                    navController.navigate("acknowledgments")
                 }
             )
+        }
+        composable("acknowledgments") {
+            AcknowledgmentsScreen(onBack = { navController.popBackStack() })
         }
         composable("about") {
             AboutAcademicScreen(
                 profile = AboutDeveloper.getProfile(),
                 onBack = { navController.popBackStack() }
             )
+        }
+        composable("dictionary") {
+            DictionaryScreen(onBack = { navController.popBackStack() })
         }
         composable("tens") {
             TensScreen(onBack = { navController.popBackStack() })

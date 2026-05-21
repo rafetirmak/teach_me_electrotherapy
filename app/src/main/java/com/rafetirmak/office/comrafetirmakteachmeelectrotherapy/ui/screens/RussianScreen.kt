@@ -24,8 +24,8 @@ fun RussianScreen(onBack: () -> Unit) {
     var burstFreq by remember { mutableFloatStateOf(50f) } // 50 Hz standard
     var dutyCycle by remember { mutableFloatStateOf(50f) } // 50% standard
     var surgeOn by remember { mutableFloatStateOf(10f) }
-    var surgeOff by remember { mutableFloatStateOf(10f) }
-    var timebase by remember { mutableFloatStateOf(20f) }
+    var surgeOff by remember { mutableFloatStateOf(50f) }
+    var timebase by remember { mutableFloatStateOf(5.9f) }
 
     Scaffold(
         topBar = {
@@ -55,6 +55,7 @@ fun RussianScreen(onBack: () -> Unit) {
                     WaveformChannel(
                         name = stringResource(R.string.current_russian),
                         color = Color(0xFFC0392B),
+                        expectedMaxFreq = carrierFreq, // Carrier is 2500Hz
                         onDrawWaveform = { t ->
                             calculateRussianValue(t, amp, carrierFreq, burstFreq, dutyCycle, surgeOn, surgeOff)
                         }
@@ -71,7 +72,7 @@ fun RussianScreen(onBack: () -> Unit) {
                 ControlSlider(label = "${stringResource(R.string.russian_burst_freq)}: ${burstFreq.toInt()} Hz", value = burstFreq, range = 1f..150f) { burstFreq = it }
                 ControlSlider(label = "${stringResource(R.string.galvanic_duty_cycle)}: ${dutyCycle.toInt()}%", value = dutyCycle, range = 10f..100f) { dutyCycle = it }
                 ControlSlider(label = "${stringResource(R.string.faradic_on)}: ${surgeOn.toInt()} s", value = surgeOn, range = 1f..30f) { surgeOn = it }
-                ControlSlider(label = "${stringResource(R.string.faradic_off)}: ${surgeOff.toInt()} s", value = surgeOff, range = 1f..30f) { surgeOff = it }
+                ControlSlider(label = "${stringResource(R.string.faradic_off)}: ${surgeOff.toInt()} s", value = surgeOff, range = 1f..60f) { surgeOff = it }
                 ControlSlider(label = "${stringResource(R.string.label_zoom)}: ${String.format("%.1f", timebase)} ms", value = timebase, range = 0.5f..100f) { timebase = it }
             }
         }
@@ -96,7 +97,8 @@ private fun calculateRussianValue(
     val burstOnDuration = burstPeriod * (dutyCycle / 100.0)
     
     if (tBurst < burstOnDuration) {
-        return (amp * Math.sin(2.0 * Math.PI * carrierFreq * t)).toFloat()
+        // Use tBurst instead of t to sync carrier phase with burst start
+        return (amp * Math.sin(2.0 * Math.PI * carrierFreq * tBurst)).toFloat()
     } else {
         return 0f
     }

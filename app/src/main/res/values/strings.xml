@@ -27,6 +27,22 @@
     <string name="label_yes">Evet</string>
     <string name="label_no">Hayır</string>
 
+    <!-- Dictionary -->
+    <string name="dictionary_title">Sözlük</string>
+    <string name="search_hint">Terim ara...</string>
+    <string name="no_results">Sonuç bulunamadı.</string>
+    <string name="sync_dictionary">Sözlüğü Senkronize Et</string>
+    <string name="check_connection">Bağlantıyı Kontrol Et</string>
+    <string name="connection_ok">Bağlantı Başarılı</string>
+    <string name="connection_error">Bağlantı Hatası</string>
+    <string name="found_files">Bulunan Dosyalar:</string>
+
+    <!-- In Memory -->
+    <string name="acknowledgments_title">Saygıyla Anıyoruz</string>
+    <string name="acknowledgments_desc">Elektroterapi biliminin gelişimine ömürlerini adayan, çalışmalarıyla bizlere ışık tutan değerli hocalarımızın anısına.</string>
+    <string name="contrib_alex_ward">Alex Ward</string>
+    <string name="contrib_tim_watson">Tim Watson</string>
+
 
     <!-- Common Controls -->
     <string name="label_amplitude">Genlik</string>
@@ -107,6 +123,7 @@
     <string name="orcid_label">ORCID: %s</string>
     <string name="wos_label">Web of Science: %s</string>
     <string name="books_section">Fizyoterapi Elektronik Kitaplar Serisi</string>
+    <string name="books_url">https://rafetirmak.com/kitaplar.php</string>
 
     <!-- Profil Bilgileri -->
     <string name="profile_name">Rafet Irmak</string>

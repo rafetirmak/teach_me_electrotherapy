@@ -1,6 +1,7 @@
 package com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -138,6 +139,7 @@ fun AboutAcademicScreen(
 
             // Alt Logo Bölümü
             item {
+                val booksUrl = stringResource(R.string.books_url)
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -147,7 +149,9 @@ fun AboutAcademicScreen(
                     Image(
                         painter = painterResource(id = R.drawable.pt_e_kitap_logo),
                         contentDescription = null,
-                        modifier = Modifier.size(120.dp),
+                        modifier = Modifier
+                            .size(120.dp)
+                            .clickable { uriHandler.openUri(booksUrl) },
                         contentScale = ContentScale.Fit
                     )
                 }

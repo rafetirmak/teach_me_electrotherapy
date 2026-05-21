@@ -18,7 +18,9 @@ import com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.R
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Settings
 
 data class CurrentType(val id: String, val nameResId: Int, val level: DifficultyLevel)
@@ -35,7 +37,9 @@ enum class DifficultyLevel(val titleResId: Int) {
 fun MainScreen(
     onNavigateToCurrent: (String) -> Unit,
     onNavigateToSettings: () -> Unit,
-    onNavigateToAbout: () -> Unit
+    onNavigateToAbout: () -> Unit,
+    onNavigateToDictionary: () -> Unit,
+    onNavigateToAcknowledgments: () -> Unit
 ) {
     val context = LocalContext.current
     var showExitDialog by remember { mutableStateOf(false) }
@@ -76,20 +80,40 @@ fun MainScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.main_title)) },
-                actions = {
-                    IconButton(onClick = onNavigateToAbout) {
-                        Icon(Icons.Default.Info, contentDescription = stringResource(R.string.about_title))
-                    }
-                    IconButton(onClick = onNavigateToSettings) {
-                        Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings_title))
-                    }
-                    IconButton(onClick = { showExitDialog = true }) {
-                        Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = stringResource(R.string.label_exit))
+            Surface(shadowElevation = 4.dp) {
+                Column(modifier = Modifier.fillMaxWidth().statusBarsPadding()) {
+                    Text(
+                        text = stringResource(R.string.main_title),
+                        style = MaterialTheme.typography.headlineMedium,
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 8.dp, end = 8.dp, bottom = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        IconButton(onClick = onNavigateToDictionary) {
+                            Icon(Icons.Default.Book, contentDescription = stringResource(R.string.dictionary_title))
+                        }
+                        
+                        Spacer(modifier = Modifier.weight(1f))
+                        
+                        IconButton(onClick = onNavigateToSettings) {
+                            Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings_title))
+                        }
+                        IconButton(onClick = onNavigateToAcknowledgments) {
+                            Icon(Icons.Default.Star, contentDescription = stringResource(R.string.acknowledgments_title))
+                        }
+                        IconButton(onClick = onNavigateToAbout) {
+                            Icon(Icons.Default.Info, contentDescription = stringResource(R.string.about_title))
+                        }
+                        IconButton(onClick = { showExitDialog = true }) {
+                            Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = stringResource(R.string.label_exit))
+                        }
                     }
                 }
-            )
+            }
         }
     ) { padding ->
         LazyVerticalGrid(

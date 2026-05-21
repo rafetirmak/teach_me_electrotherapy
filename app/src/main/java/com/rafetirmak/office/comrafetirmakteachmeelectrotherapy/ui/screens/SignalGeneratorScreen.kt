@@ -33,7 +33,7 @@ enum class WaveformType(val labelResId: Int) {
 @Composable
 fun SignalGeneratorScreen(onBack: () -> Unit) {
     var amp by remember { mutableFloatStateOf(50f) }
-    var freq by remember { mutableFloatStateOf(2f) }
+    var freq by remember { mutableFloatStateOf(50f) }
     var selectedWaveform by remember { mutableStateOf(WaveformType.SINE) }
     var timebase by remember { mutableFloatStateOf(10.0f) }
 
@@ -65,6 +65,7 @@ fun SignalGeneratorScreen(onBack: () -> Unit) {
                     WaveformChannel(
                         name = "Generator",
                         color = Color(0xFF2980B9),
+                        expectedMaxFreq = freq,
                         onDrawWaveform = { t ->
                             calculateWaveformValue(t, amp, freq, selectedWaveform)
                         }

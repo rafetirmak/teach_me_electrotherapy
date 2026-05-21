@@ -29,10 +29,10 @@ enum class TensMode(val labelResId: Int) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TensScreen(onBack: () -> Unit) {
-    var amp by remember { mutableFloatStateOf(20f) }
-    var freq by remember { mutableFloatStateOf(80f) }
-    var pw by remember { mutableFloatStateOf(200f) }
-    var timebase by remember { mutableFloatStateOf(2.0f) }
+    var amp by remember { mutableFloatStateOf(50f) }
+    var freq by remember { mutableFloatStateOf(143f) }
+    var pw by remember { mutableFloatStateOf(400f) }
+    var timebase by remember { mutableFloatStateOf(1.5f) }
     var selectedMode by remember { mutableStateOf(TensMode.BIPHASIC_SYM) }
 
     Scaffold(
@@ -63,6 +63,7 @@ fun TensScreen(onBack: () -> Unit) {
                     WaveformChannel(
                         name = "TENS",
                         color = Color(0xFF2980B9),
+                        expectedMaxFreq = freq * 10f, // Pulse components have high freq
                         onDrawWaveform = { t ->
                             calculateTensValue(t, amp, freq, pw, selectedMode)
                         }

@@ -19,7 +19,7 @@ import com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IfcScreen(onBack: () -> Unit) {
-    var amp by remember { mutableFloatStateOf(50f) }
+    var amp by remember { mutableFloatStateOf(60f) }
     var amf by remember { mutableFloatStateOf(100f) }
     var timebase by remember { mutableFloatStateOf(10.0f) }
     var autoSync by remember { mutableStateOf(true) }
@@ -57,7 +57,8 @@ fun IfcScreen(onBack: () -> Unit) {
                     name = stringResource(R.string.ifc_carrier),
                     color = Color(0xFF2980B9),
                     centerYPercent = 0.2f,
-                    scaleY = amp * 0.8f * 0.5f, // Scaled down to fit
+                    scaleY = amp * 0.8f * 0.5f,
+                    expectedMaxFreq = carrier,
                     onDrawWaveform = { t -> Math.sin(2.0 * Math.PI * carrier * t).toFloat() }
                 ),
                 WaveformChannel(
@@ -65,6 +66,7 @@ fun IfcScreen(onBack: () -> Unit) {
                     color = Color(0xFFE67E22),
                     centerYPercent = 0.5f,
                     scaleY = amp * 0.8f * 0.5f,
+                    expectedMaxFreq = amf,
                     onDrawWaveform = { t -> Math.sin(2.0 * Math.PI * amf * t).toFloat() }
                 ),
                 WaveformChannel(
@@ -72,6 +74,7 @@ fun IfcScreen(onBack: () -> Unit) {
                     color = Color(0xFF27AE60),
                     centerYPercent = 0.8f,
                     scaleY = amp * 0.4f * 0.5f,
+                    expectedMaxFreq = carrier + amf,
                     onDrawWaveform = { t ->
                         val wave1 = Math.sin(2.0 * Math.PI * carrier * t)
                         val wave2 = Math.sin(2.0 * Math.PI * (carrier + amf) * t)

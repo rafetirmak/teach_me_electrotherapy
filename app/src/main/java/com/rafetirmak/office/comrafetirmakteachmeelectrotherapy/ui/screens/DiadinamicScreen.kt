@@ -24,7 +24,7 @@ import com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DiadinamicScreen(onBack: () -> Unit) {
-    var amp by remember { mutableFloatStateOf(25f) }
+    var amp by remember { mutableFloatStateOf(30f) }
     var timebase by remember { mutableFloatStateOf(10.0f) }
 
     Scaffold(

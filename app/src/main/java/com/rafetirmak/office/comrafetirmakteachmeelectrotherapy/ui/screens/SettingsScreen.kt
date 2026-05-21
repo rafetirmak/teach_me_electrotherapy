@@ -16,13 +16,20 @@ import androidx.compose.ui.unit.dp
 import com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.R
 import com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.utils.SettingsManager
 import androidx.activity.ComponentActivity
+import com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.utils.DictionarySyncManager
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(onBack: () -> Unit) {
     val context = LocalContext.current
+    val scope = rememberCoroutineScope()
     val settingsManager = remember { SettingsManager(context) }
     var selectedLanguage by remember { mutableStateOf(settingsManager.language) }
+    
+    var connectionStatus by remember { mutableStateOf<String?>(null) }
+    var foundFiles by remember { mutableStateOf<List<String>>(emptyList()) }
+    var isChecking by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -65,7 +72,6 @@ fun SettingsScreen(onBack: () -> Unit) {
                                     if (code != selectedLanguage) {
                                         selectedLanguage = code
                                         settingsManager.language = code
-                                        // Uygulamayı yeniden başlatarak dili uygula
                                         (context as? ComponentActivity)?.recreate()
                                     }
                                 },
@@ -84,6 +90,66 @@ fun SettingsScreen(onBack: () -> Unit) {
                             modifier = Modifier.padding(start = 16.dp)
                         )
                     }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+            HorizontalDivider()
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Text(
+                text = stringResource(R.string.sync_dictionary),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+
+            Button(
+                onClick = {
+                    isChecking = true
+                    connectionStatus = null
+                    scope.launch {
+                        val files = DictionarySyncManager.testConnection()
+                        isChecking = false
+                        if (files != null) {
+                            connectionStatus = context.getString(R.string.connection_ok)
+                            foundFiles = files
+                        } else {
+                            connectionStatus = context.getString(R.string.connection_error)
+                            foundFiles = emptyList()
+                        }
+                    }
+                },
+                enabled = !isChecking,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                if (isChecking) {
+                    CircularProgressIndicator(modifier = Modifier.size(24.dp), color = MaterialTheme.colorScheme.onPrimary)
+                } else {
+                    Text(stringResource(R.string.check_connection))
+                }
+            }
+
+            if (connectionStatus != null) {
+                Text(
+                    text = connectionStatus!!,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = if (foundFiles.isNotEmpty()) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+            }
+
+            if (foundFiles.isNotEmpty()) {
+                Text(
+                    text = stringResource(R.string.found_files),
+                    style = MaterialTheme.typography.titleSmall,
+                    modifier = Modifier.padding(top = 16.dp)
+                )
+                foundFiles.forEach { fileName ->
+                    Text(
+                        text = "- $fileName",
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(start = 8.dp, top = 4.dp)
+                    )
                 }
             }
         }
