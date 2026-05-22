@@ -30,6 +30,8 @@ fun SettingsScreen(onBack: () -> Unit) {
     var connectionStatus by remember { mutableStateOf<String?>(null) }
     var foundFiles by remember { mutableStateOf<List<String>>(emptyList()) }
     var isChecking by remember { mutableStateOf(false) }
+    var isDownloading by remember { mutableStateOf(false) }
+    var downloadMessage by remember { mutableStateOf<String?>(null) }
 
     Scaffold(
         topBar = {
@@ -107,6 +109,7 @@ fun SettingsScreen(onBack: () -> Unit) {
                 onClick = {
                     isChecking = true
                     connectionStatus = null
+                    downloadMessage = null
                     scope.launch {
                         val files = DictionarySyncManager.testConnection()
                         isChecking = false
@@ -119,7 +122,7 @@ fun SettingsScreen(onBack: () -> Unit) {
                         }
                     }
                 },
-                enabled = !isChecking,
+                enabled = !isChecking && !isDownloading,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 if (isChecking) {
@@ -151,6 +154,43 @@ fun SettingsScreen(onBack: () -> Unit) {
                         modifier = Modifier.padding(start = 8.dp, top = 4.dp)
                     )
                 }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Button(
+                    onClick = {
+                        isDownloading = true
+                        downloadMessage = null
+                        scope.launch {
+                            val success = DictionarySyncManager.syncDictionary(context)
+                            isDownloading = false
+                            downloadMessage = if (success) {
+                                context.getString(R.string.download_success)
+                            } else {
+                                context.getString(R.string.download_error)
+                            }
+                        }
+                    },
+                    enabled = !isDownloading,
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)
+                ) {
+                    if (isDownloading) {
+                        CircularProgressIndicator(modifier = Modifier.size(24.dp), color = MaterialTheme.colorScheme.onSecondary)
+                    } else {
+                        Text(stringResource(R.string.confirm_and_download))
+                    }
+                }
+            }
+
+            if (downloadMessage != null) {
+                Text(
+                    text = downloadMessage!!,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = if (downloadMessage == context.getString(R.string.download_success)) 
+                        MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
             }
         }
     }

@@ -54,7 +54,10 @@
     <string name="check_connection">Check Connection</string>
     <string name="connection_ok">Connection Successful</string>
     <string name="connection_error">Connection Error</string>
-    <string name="found_files">Found Files:</string>
+    <string name="found_files">Found File:</string>
+    <string name="confirm_and_download">Confirm and Download</string>
+    <string name="download_success">Dictionary updated successfully.</string>
+    <string name="download_error">Error occurred during download.</string>
 
     <!-- In Memory -->
     <string name="acknowledgments_title">In Memory</string>
