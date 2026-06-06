@@ -20,8 +20,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Sync
 
 data class CurrentType(val id: String, val nameResId: Int, val level: DifficultyLevel)
 
@@ -39,10 +41,12 @@ fun MainScreen(
     onNavigateToSettings: () -> Unit,
     onNavigateToAbout: () -> Unit,
     onNavigateToDictionary: () -> Unit,
-    onNavigateToAcknowledgments: () -> Unit
+    onNavigateToAcknowledgments: () -> Unit,
+    onNavigateToDictionarySync: () -> Unit
 ) {
     val context = LocalContext.current
     var showExitDialog by remember { mutableStateOf(false) }
+    var menuExpanded by remember { mutableStateOf(false) }
 
     val currentTypes = listOf(
         CurrentType("signal_generator", R.string.current_signal_gen, DifficultyLevel.BEGINNER),
@@ -99,17 +103,56 @@ fun MainScreen(
                         
                         Spacer(modifier = Modifier.weight(1f))
                         
-                        IconButton(onClick = onNavigateToSettings) {
-                            Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.settings_title))
-                        }
-                        IconButton(onClick = onNavigateToAcknowledgments) {
-                            Icon(Icons.Default.Star, contentDescription = stringResource(R.string.acknowledgments_title))
-                        }
-                        IconButton(onClick = onNavigateToAbout) {
-                            Icon(Icons.Default.Info, contentDescription = stringResource(R.string.about_title))
-                        }
-                        IconButton(onClick = { showExitDialog = true }) {
-                            Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = stringResource(R.string.label_exit))
+                        Box {
+                            IconButton(onClick = { menuExpanded = true }) {
+                                Icon(Icons.Default.MoreVert, contentDescription = "Menu")
+                            }
+                            DropdownMenu(
+                                expanded = menuExpanded,
+                                onDismissRequest = { menuExpanded = false }
+                            ) {
+                                DropdownMenuItem(
+                                    text = { Text(stringResource(R.string.settings_title)) },
+                                    onClick = {
+                                        menuExpanded = false
+                                        onNavigateToSettings()
+                                    },
+                                    leadingIcon = { Icon(Icons.Default.Settings, null) }
+                                )
+                                DropdownMenuItem(
+                                    text = { Text(stringResource(R.string.sync_dictionary)) },
+                                    onClick = {
+                                        menuExpanded = false
+                                        onNavigateToDictionarySync()
+                                    },
+                                    leadingIcon = { Icon(Icons.Default.Sync, null) }
+                                )
+                                DropdownMenuItem(
+                                    text = { Text(stringResource(R.string.acknowledgments_title)) },
+                                    onClick = {
+                                        menuExpanded = false
+                                        onNavigateToAcknowledgments()
+                                    },
+                                    leadingIcon = { Icon(Icons.Default.Star, null) }
+                                )
+                                DropdownMenuItem(
+                                    text = { Text(stringResource(R.string.about_title)) },
+                                    onClick = {
+                                        menuExpanded = false
+                                        onNavigateToAbout()
+                                    },
+                                    leadingIcon = { Icon(Icons.Default.Info, null) }
+                                )
+                                HorizontalDivider()
+                                DropdownMenuItem(
+                                    text = { Text(stringResource(R.string.label_exit)) },
+                                    onClick = {
+                                        menuExpanded = false
+                                        showExitDialog = true
+                                    },
+                                    leadingIcon = { Icon(Icons.AutoMirrored.Filled.ExitToApp, null) }
+                                )
+                            }
                         }
                     }
                 }

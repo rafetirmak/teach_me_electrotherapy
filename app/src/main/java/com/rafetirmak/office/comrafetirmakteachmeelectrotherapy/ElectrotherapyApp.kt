@@ -38,8 +38,14 @@ fun ElectrotherapyApp() {
                 },
                 onNavigateToAcknowledgments = {
                     navController.navigate("acknowledgments")
+                },
+                onNavigateToDictionarySync = {
+                    navController.navigate("dictionary_sync")
                 }
             )
+        }
+        composable("dictionary_sync") {
+            DictionarySyncScreen(onBack = { navController.popBackStack() })
         }
         composable("acknowledgments") {
             AcknowledgmentsScreen(onBack = { navController.popBackStack() })

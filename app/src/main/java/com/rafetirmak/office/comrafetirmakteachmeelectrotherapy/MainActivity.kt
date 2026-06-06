@@ -26,9 +26,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // Sync dictionary in background
+        // Smart auto sync: only download if a new version exists
         lifecycleScope.launch {
-            DictionarySyncManager.syncDictionary(applicationContext)
+            DictionarySyncManager.autoSyncIfNeeded(applicationContext)
         }
 
         setContent {

@@ -3,6 +3,7 @@ package com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.utils
 import android.content.Context
 import com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.model.DictionaryData
 import com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.model.DictionaryEntry
+import com.rafetirmak.office.comrafetirmakteachmeelectrotherapy.model.VersionData
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
@@ -23,8 +24,11 @@ private data class ServerDictionaryEntry(
 )
 
 object DictionarySyncManager {
-    private const val BASE_URL = "https://rafetirmak.com/assets/data/android_data/teachme_electrotherapy"
+    private const val BASE_URL = "https://www.rafetirmak.com/assets/data/android_data/teachme_electrotherapy"
     private const val FILE_NAME = "dictionary.json"
+    private const val VERSIONS_FILE = "versions.json"
+    private const val PREFS_NAME = "dictionary_prefs"
+    private const val KEY_DICT_VERSION = "dict_version"
 
     private val json = Json {
         ignoreUnknownKeys = true
@@ -38,13 +42,35 @@ object DictionarySyncManager {
         }
     }
 
+    /**
+     * Checks if a newer version exists on the server and downloads it if necessary.
+     */
+    suspend fun autoSyncIfNeeded(context: Context) {
+        try {
+            val timestamp = System.currentTimeMillis()
+            val versions: VersionData = client.get("$BASE_URL/$VERSIONS_FILE?t=$timestamp").body()
+            val serverVersion = versions.dictionary.version
+            
+            val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            val localVersion = prefs.getInt(KEY_DICT_VERSION, 0)
+
+            if (serverVersion > localVersion) {
+                val success = syncDictionary(context)
+                if (success) {
+                    prefs.edit().putInt(KEY_DICT_VERSION, serverVersion).apply()
+                }
+            }
+        } catch (e: Exception) {
+            android.util.Log.e("SyncError", "Auto sync failed: ${e.message}")
+        }
+    }
+
     suspend fun syncDictionary(context: Context): Boolean {
         return try {
-            val response: String = client.get("$BASE_URL/$FILE_NAME").body()
-            // Sunucudan gelen listeyi oku
+            val timestamp = System.currentTimeMillis()
+            val response: String = client.get("$BASE_URL/$FILE_NAME?t=$timestamp").body()
             val serverList = json.decodeFromString<List<ServerDictionaryEntry>>(response)
             
-            // Veriyi uygulamanın iç formatına (tr/en listeleri) dönüştür
             val trList = serverList.map { DictionaryEntry(it.term_tr, it.definition_tr) }
             val enList = serverList.map { DictionaryEntry(it.term_en, it.definition_en) }
             
@@ -52,17 +78,17 @@ object DictionarySyncManager {
             saveLocal(context, data)
             true
         } catch (e: Exception) {
-            android.util.Log.e("SyncError", "Hata: ${e.message}")
-            e.printStackTrace()
+            android.util.Log.e("SyncError", "Sync failed: ${e.message}")
             false
         }
     }
 
-    suspend fun testConnection(): List<String>? {
+    suspend fun testConnection(): VersionData? {
         return try {
-            val response = client.get("$BASE_URL/$FILE_NAME")
+            val timestamp = System.currentTimeMillis()
+            val response = client.get("$BASE_URL/$VERSIONS_FILE?t=$timestamp")
             if (response.status.value == 200) {
-                listOf(FILE_NAME)
+                response.body()
             } else {
                 null
             }
@@ -71,9 +97,18 @@ object DictionarySyncManager {
         }
     }
 
+    suspend fun manualSync(context: Context, version: Int): Boolean {
+        val success = syncDictionary(context)
+        if (success) {
+            val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            prefs.edit().putInt(KEY_DICT_VERSION, version).apply()
+        }
+        return success
+    }
+
     private fun saveLocal(context: Context, data: DictionaryData) {
         val file = File(context.filesDir, FILE_NAME)
-        val jsonString = Json.encodeToString(data)
+        val jsonString = json.encodeToString(data)
         file.writeText(jsonString)
     }
 
@@ -82,7 +117,7 @@ object DictionarySyncManager {
             val file = File(context.filesDir, FILE_NAME)
             if (file.exists()) {
                 val jsonString = file.readText()
-                val data = Json.decodeFromString<DictionaryData>(jsonString)
+                val data = json.decodeFromString<DictionaryData>(jsonString)
                 if (lang == "tr") data.tr else data.en
             } else {
                 null

@@ -21,7 +21,7 @@
     <string name="settings_title">Ayarlar</string>
     <string name="settings_language">Uygulama Dili</string>
     <string name="lang_tr">🇹🇷 Türkçe</string>
-    <string name="lang_en">🇺🇸 English</string>
+    <string name="lang_en">🇬🇧 English</string>
     <string name="label_exit">Çıkış</string>
     <string name="exit_confirm">Uygulamadan çıkmak istediğinize emin misiniz?</string>
     <string name="label_yes">Evet</string>

@@ -40,7 +40,7 @@
     <string name="settings_title">Settings</string>
     <string name="settings_language">App Language</string>
     <string name="lang_tr">🇹🇷 Turkish</string>
-    <string name="lang_en">🇺🇸 English</string>
+    <string name="lang_en">🇬🇧 English</string>
     <string name="label_exit">Exit</string>
     <string name="exit_confirm">Are you sure you want to exit?</string>
     <string name="label_yes">Yes</string>
