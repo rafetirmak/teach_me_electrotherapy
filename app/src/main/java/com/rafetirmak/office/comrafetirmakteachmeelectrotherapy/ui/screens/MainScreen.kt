@@ -11,6 +11,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 import androidx.compose.ui.res.stringResource
@@ -31,7 +33,8 @@ enum class DifficultyLevel(val titleResId: Int) {
     BEGINNER(R.string.level_beginner),
     INTERMEDIATE(R.string.level_intermediate),
     ADVANCED(R.string.level_advanced),
-    EXPERT(R.string.level_expert)
+    EXPERT(R.string.level_expert),
+    SPECIALIST(R.string.level_specialist)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,7 +60,8 @@ fun MainScreen(
         CurrentType("faradic", R.string.current_faradic, DifficultyLevel.ADVANCED),
         CurrentType("high_voltage", R.string.current_high_voltage, DifficultyLevel.EXPERT),
         CurrentType("russian", R.string.current_russian, DifficultyLevel.EXPERT),
-        CurrentType("ifc", R.string.current_ifc, DifficultyLevel.EXPERT)
+        CurrentType("ifc", R.string.current_ifc, DifficultyLevel.EXPERT),
+        CurrentType("semg", R.string.twin_app_title, DifficultyLevel.SPECIALIST)
     )
 
     val groupedCurrents = remember(currentTypes) {
@@ -159,6 +163,8 @@ fun MainScreen(
             }
         }
     ) { padding ->
+        val uriHandler = LocalUriHandler.current
+
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             contentPadding = PaddingValues(16.dp),
@@ -166,6 +172,43 @@ fun MainScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.padding(padding)
         ) {
+            // Seviye 1 öncesi Eğitim Videoları Bölümü
+            item(span = { GridItemSpan(maxLineSpan) }) {
+                val youtubeLink = stringResource(R.string.youtube_url)
+                Card(
+                    onClick = { uriHandler.openUri(youtubeLink) },
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer
+                    )
+                ) {
+                    Row(
+                        modifier = Modifier.padding(16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            Icons.Default.Book, // Using an available icon
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSecondaryContainer
+                        )
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Column {
+                            Text(
+                                text = stringResource(R.string.label_tutorials),
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onSecondaryContainer
+                            )
+                            Text(
+                                text = stringResource(R.string.desc_tutorials),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSecondaryContainer
+                            )
+                        }
+                    }
+                }
+            }
+
             groupedCurrents.forEach { (level, currents) ->
                 item(span = { GridItemSpan(maxLineSpan) }) {
                     Text(
@@ -176,23 +219,61 @@ fun MainScreen(
                     )
                 }
 
-                items(currents) { type ->
-                    Card(
-                        onClick = { onNavigateToCurrent(type.id) },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(120.dp)
-                    ) {
-                        Box(
-                            contentAlignment = Alignment.Center,
-                            modifier = Modifier.fillMaxSize()
-                        ) {
-                            Text(
-                                text = stringResource(type.nameResId),
-                                style = MaterialTheme.typography.titleMedium,
-                                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                                modifier = Modifier.padding(8.dp)
+                if (level == DifficultyLevel.SPECIALIST) {
+                    item(span = { GridItemSpan(maxLineSpan) }) {
+                        val semgUrl = "https://play.google.com/store/apps/details?id=com.rafetirmak.teachmesemg"
+                        Card(
+                            onClick = { uriHandler.openUri(semgUrl) },
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.tertiaryContainer
                             )
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(16.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    Icons.Default.Star,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.onTertiaryContainer
+                                )
+                                Spacer(modifier = Modifier.width(12.dp))
+                                Column {
+                                    Text(
+                                        text = stringResource(R.string.twin_app_title),
+                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.onTertiaryContainer
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.twin_app_desc),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onTertiaryContainer
+                                    )
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    items(currents) { type ->
+                        Card(
+                            onClick = { onNavigateToCurrent(type.id) },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(120.dp)
+                        ) {
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier.fillMaxSize()
+                            ) {
+                                Text(
+                                    text = stringResource(type.nameResId),
+                                    style = MaterialTheme.typography.titleMedium,
+                                    textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                                    modifier = Modifier.padding(8.dp)
+                                )
+                            }
                         }
                     }
                 }

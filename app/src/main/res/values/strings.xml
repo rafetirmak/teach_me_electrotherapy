@@ -7,6 +7,7 @@
     <string name="level_intermediate">Seviye 2: Orta Seviye</string>
     <string name="level_advanced">Seviye 3: İleri Seviye</string>
     <string name="level_expert">Seviye 4: Uzmanlık</string>
+    <string name="level_specialist">Seviye 5: Uzmanlık &amp; Analiz</string>
     <string name="current_tens">TENS</string>
     <string name="current_ifc">IFC (İnterferansiyel)</string>
     <string name="current_faradic">Faradic</string>
@@ -132,6 +133,14 @@
     <string name="profile_name">Rafet Irmak</string>
     <string name="profile_title">Spor Fizyoterapisti\n(Bilim Doktoru)</string>
     <string name="profile_bio">Fizyoterapi ve rehabilitasyon alanında bilimsel çalışmalar yürütmekte ve dijital eğitim kaynakları geliştirmekteyim.</string>
+
+    <!-- Twin App -->
+    <string name="twin_app_title">Teach Me sEMG</string>
+    <string name="twin_app_desc">İkiz uygulamamızı keşfedin ve sEMG temellerini öğrenin.</string>
+
+    <string name="label_tutorials">Eğitim Videoları</string>
+    <string name="desc_tutorials">Uygulamanın kullanımı ile ilgili eğitim videolarını izleyin.</string>
+    <string name="youtube_url">https://youtube.com/playlist?list=PLxZYYIBry0eWVjpVSkmw5kilcWU7eTGrn&amp;si=hiHDa8J-nuK8ANZN</string>
 
     <!-- Kitaplar -->
     <string name="book1_title">Fizyoterapi El Kitabı</string>

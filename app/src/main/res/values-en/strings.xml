@@ -7,6 +7,7 @@
     <string name="level_intermediate">Level 2: Intermediate</string>
     <string name="level_advanced">Level 3: Advanced</string>
     <string name="level_expert">Level 4: Expert</string>
+    <string name="level_specialist">Level 5: Specialist &amp; Analysis</string>
     <string name="current_tens">TENS</string>
     <string name="current_ifc">IFC (Interferential)</string>
     <string name="current_faradic">Faradic</string>
@@ -132,6 +133,14 @@
     <string name="profile_name">Rafet Irmak</string>
     <string name="profile_title">Sports Physiotherapist\n(PT PhD)</string>
     <string name="profile_bio">I conduct scientific studies in the field of physiotherapy and rehabilitation and develop digital educational resources.</string>
+
+    <!-- Twin App -->
+    <string name="twin_app_title">Teach Me sEMG</string>
+    <string name="twin_app_desc">Discover our twin app and learn the basics of sEMG.</string>
+
+    <string name="label_tutorials">Tutorial Videos</string>
+    <string name="desc_tutorials">Watch tutorial videos on how to use the application.</string>
+    <string name="youtube_url">https://youtube.com/playlist?list=PLxZYYIBry0eWVjpVSkmw5kilcWU7eTGrn&amp;si=hiHDa8J-nuK8ANZN</string>
 
     <!-- Books -->
     <string name="book1_title">Physiotherapy Handbook</string>
